@@ -25,12 +25,20 @@ namespace JSON
         {
             // Print value of array items.
             string printable = PrintHelper.Indent(indent) + "[\r\n";
+            bool atLeastOneEntry = false;
             foreach (IValue item in val)
             {
                 printable += PrintHelper.Indent(indent + 3) + item.PrintValue(indent + 3) + ",\r\n";
             }
-            printable = printable.Substring(0, printable.Length - 3); // Clean ",\r\n" from the end.
-            printable += "\r\n" + PrintHelper.Indent(indent) + "]";
+            if (atLeastOneEntry)
+            {
+                printable = printable.Substring(0, printable.Length - 3); // Clean ",\r\n" from the end.
+                printable += "\r\n" + PrintHelper.Indent(indent) + "]";
+            }
+            else
+            {
+                printable += "]";
+            }
             return printable;
         }
     }

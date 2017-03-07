@@ -20,15 +20,20 @@ namespace JSON
             //rawtext = "{ \"name\":\"John\", \"age\":30, \"car\":null, \"Ted\":false, \"cars\": {\"car1\":\"Ford\", \"car2\":\"BMW\", \"car3\":\"Fiat\"}, \"morecars\":[ \"Ford\", \"BMW\", \"Fiat\" ]}";
             JSONParser parser = new JSONParser(rawtext);
             Console.WriteLine("Sucessfully parsed JSON object with a weight of " + parser.weight);
-            // This currently does nothing right now.
-            string printable = parser.Pretty_Print();
 
-            // Test the printer for correctness.
-            // Uncommenting the below line throws an error.
-            //JSONParser printTest = new JSONParser(printable);
+            if (args.Length > 1)    // Check for verbose argument.
+            {
+                if (args[1] == "-v")    // Check that it actually is the verbose argument.
+                {
+                    string printable = parser.Pretty_Print();
 
-            // Uncomment to print the json object. (currently invalid, however.)
-            //Console.WriteLine(printable);
+                    // Test printer for correctness.
+                    //JSONParser printTest = new JSONParser(printable);
+
+                    // Uncomment to print the json object. (currently invalid, however.)
+                    Console.WriteLine(printable);
+                }
+            }
         }
     }
 }
