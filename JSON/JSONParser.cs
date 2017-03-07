@@ -6,6 +6,7 @@ namespace JSON
     {
         private static string InvalidJSONError = "Error, invalid JSON.";
         public JSONObj root { get; set; }
+        public int weight { get; set; }
 
         public JSONParser(string text)
         {
@@ -146,7 +147,7 @@ namespace JSON
                         
                 }
             }
-
+            weight++;
             return item;
         }
 
@@ -196,7 +197,7 @@ namespace JSON
 
                 }
             }
-
+            weight++;
             return item;
         }
 
@@ -204,6 +205,7 @@ namespace JSON
         {
             JSONNull item = new JSONNull();
             text = text.Substring(4);    // remove null
+            weight++;
             return item;
         }
 
@@ -220,6 +222,7 @@ namespace JSON
                 item = new JSONBool(false);
                 text = text.Substring(5);
             }
+            weight++;
             return item;
         }
 
@@ -229,12 +232,14 @@ namespace JSON
             string numstring = text.Substring(0, indexOfComma);
             text = text.Substring(indexOfComma);
             JSONFloat item = new JSONFloat(float.Parse(numstring));
+            weight++;
             return item;
         }
 
         private JSONString ParseString(ref string text)
         {
             JSONString item = new JSONString(GrabQuotedString(ref text));
+            weight++;
             return item;
         }
 

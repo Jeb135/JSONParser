@@ -10,7 +10,7 @@ namespace JSON
             JSONParser parser = new JSONParser(rawtext);
             
             // This currently does nothing right now.
-            //Console.WriteLine(parser.Pretty_Print());
+            Console.WriteLine(parser.Pretty_Print());
         }
     }
 }
