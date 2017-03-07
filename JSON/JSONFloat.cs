@@ -15,10 +15,10 @@ namespace JSON
             this.val = val;
         }
 
-        public string PrintValue()
+        public string PrintValue(int indent)
         {
             // Print value of float.
-            return "";
+            return val.ToString();
         }
     }
 }

@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace JSON
 {
-    class JSONNull : IValue
+    static class PrintHelper
     {
-        public string PrintValue(int indent)
+        public static string Indent(int indent)
         {
-            // Print null
-            return "null";
+            return new string(' ', indent);
         }
     }
 }

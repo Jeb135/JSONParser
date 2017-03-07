@@ -274,7 +274,7 @@ namespace JSON
 
         public string Pretty_Print()
         {
-            return root.PrintValue();
+            return root.PrintValue(0);
         }
     }
 }

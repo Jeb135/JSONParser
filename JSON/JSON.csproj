@@ -52,6 +52,7 @@
     <Compile Include="IValue.cs" />
     <Compile Include="JSON.cs" />
     <Compile Include="JSONString.cs" />
+    <Compile Include="PrintHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

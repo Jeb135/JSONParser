@@ -21,10 +21,19 @@ namespace JSON
             fields.Add(name, contents);
         }
 
-        public string PrintValue()
+        public string PrintValue(int indent)
         {
             // Print each portion of the object, and wrap it.
-            return "";
+            string printable = PrintHelper.Indent(indent) + "{\r\n";
+            foreach(string key in fields.Keys)
+            {
+                IValue content;
+                fields.TryGetValue(key, out content);
+                printable += PrintHelper.Indent(indent+3) + "\"" + key + "\": " + content.PrintValue(indent+3) + ",\r\n";
+            }
+            printable = printable.Substring(0, printable.Length - 3); // Clean ",\r\n" from the end.
+            printable += "\r\n" + PrintHelper.Indent(indent) + "}";
+            return printable;
         }
     }
 }

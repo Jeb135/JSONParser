@@ -2,6 +2,6 @@
 {
     interface IValue
     {
-        string PrintValue();
+        string PrintValue(int indent);
     }
 }
