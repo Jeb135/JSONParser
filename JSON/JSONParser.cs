@@ -99,6 +99,7 @@ namespace JSON
                 {
                     // End of Object.
                     // This is an edge case.
+                    text = text.Substring(1);
                     doneParsingObj = true; // break from loop.
                 }
                 else
@@ -165,6 +166,7 @@ namespace JSON
                 {
                     // End of Object.
                     // This is an edge case.
+                    text = text.Substring(1);
                     doneParsingObj = true; // break from loop.
                 }
                 else
@@ -229,8 +231,10 @@ namespace JSON
         private JSONFloat ParseFloat(ref string text)
         {
             int indexOfComma = text.IndexOf(",", 0);
-            string numstring = text.Substring(0, indexOfComma);
-            text = text.Substring(indexOfComma);
+            int indexOfBrace = text.IndexOf("}", 0);
+            int indexOfBracket = text.IndexOf("]", 0);
+            string numstring = text.Substring(0, Math.Min(indexOfComma, Math.Min(indexOfBrace, indexOfBracket)));
+            text = text.Substring(Math.Min(indexOfComma, Math.Min(indexOfBrace, indexOfBracket)));
             JSONFloat item = new JSONFloat(float.Parse(numstring));
             weight++;
             return item;
@@ -246,7 +250,23 @@ namespace JSON
         private string GrabQuotedString(ref string text)
         {
             // Grab a string at the begining of text in the form of "geuhguaga" WITHOUT quotes.
-            int length = text.IndexOf("\"", 1);
+            bool found = false;
+            int length = 2;
+            int startSearchIndex = 1;
+            while (!found)
+            {
+                length = text.IndexOf("\"", startSearchIndex);
+                char before = text[length - 1];
+                if (text[length - 1] == '\\')
+                {
+                    startSearchIndex = length + 1;
+                }
+                else
+                {
+                    found = true;
+                }
+            }
+            //int length = text.IndexOf("\"", 1);
             string quoted = text.Substring(1, length-1);
             text = text.Substring(length + 1);
             return quoted;
